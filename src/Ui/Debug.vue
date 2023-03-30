@@ -1,0 +1,7 @@
+<template>
+  <pre class="bg-gray-900 p-1 text-xs text-white rounded"><slot></slot></pre>
+</template>
+
+<script lang="ts" setup>
+
+</script>
