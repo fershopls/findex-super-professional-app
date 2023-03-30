@@ -1,7 +1,5 @@
 <template>
-  <layout-app>
-    Hello
-  </layout-app>
+  <app-main />
 </template>
 
 <script lang="ts" setup>
