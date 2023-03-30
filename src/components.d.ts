@@ -9,8 +9,13 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    App: typeof import('./App.vue')['default']
+    App: typeof import('./Main.vue')['default']
+    AppMain: typeof import('./App/Main.vue')['default']
+    AppTable: typeof import('./App/Table/Table.vue')['default']
     ComponentsHelloWorld: typeof import('./components/HelloWorld.vue')['default']
-    LayoutApp: typeof import('./layout/app.vue')['default']
+    LayoutApp: typeof import('./Layout/App.vue')['default']
+    Main: typeof import('./Main.vue')['default']
+    UiDebug: typeof import('./Ui/Debug.vue')['default']
+    UiLogo: typeof import('./Ui/Logo.vue')['default']
   }
 }
