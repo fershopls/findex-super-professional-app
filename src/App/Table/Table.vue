@@ -29,7 +29,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="row in sort(filter(rows))" :key="row" class="even:bg-gray-100">
+        <tr v-for="(row, index) in sort(filter(rows))" :key="index" class="even:bg-gray-100">
           <td v-for="column in columns" :key="column.key" class="px-4 py-3 text-sm">
             {{ row.find(r => r.column === column.key)?.value }}
           </td>
