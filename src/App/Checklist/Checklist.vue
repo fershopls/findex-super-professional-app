@@ -29,7 +29,7 @@
 
 <script lang="ts" setup>
 interface Model {
-  key: string;
+  key: string|number;
   value: string
 }
 
