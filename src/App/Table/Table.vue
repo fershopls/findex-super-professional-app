@@ -58,11 +58,12 @@
 import Column from './Column.vue';
 import {Column as ColumnType, Row, SortBy} from "./types";
 import {arrayToCsvDownload} from "./array-to-csv-download-action";
-import {sort, filter} from "@/App/Table/table-filters";
+import {search, sort, filter} from "@/App/Table/table-filters";
 
 const props = defineProps<{
   columns: ColumnType[];
   rows: Row[];
+  search?: string;
 }>();
 
 const emit = defineEmits<{
@@ -75,6 +76,10 @@ const filtersByColumnKey = ref<{ [key: string]: (number | string)[] }>({});
 
 const computedRows = computed<Row[]>(() => {
   let rows = props.rows;
+  // Search
+  if (props.search) {
+    rows = search(props.search, rows);
+  }
   // Filter
   rows = filter(filtersByColumnKey.value, rows);
   // Sort

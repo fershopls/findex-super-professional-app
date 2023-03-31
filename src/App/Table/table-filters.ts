@@ -1,5 +1,19 @@
 import {Row, SortBy} from "@/App/Table/types";
 
+export function search(query: string, rows: Row[]): Row[] {
+    return rows.filter((row): boolean => {
+        for (const cell of row) {
+            const columnString = cell.value.toLowerCase();
+
+            if (columnString.includes(query.toLowerCase())) {
+                return true;
+            }
+        }
+
+        return false;
+    });
+}
+
 export function filter(filtersByColumnKey: { [key: string]: (number | string)[] }, rows: Row[]): Row[] {
     // For every row
     return rows.filter(row => {
