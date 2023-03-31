@@ -3,35 +3,34 @@
     <div class="grid gap-4 pb-24">
       <ui-logo/>
 
-      <ui-search-bar v-model="inputSearch"/>
-
-      <div class="text-lg text-gray-600">
-        <span v-if="inputSearch">Searching <span class="font-bold">"{{ inputSearch }}"</span>.</span>
-        Found {{ rows.length }} deals.
-      </div>
-
       <app-table
           v-show="rows.length"
           :search="inputSearch"
           :columns="columns"
           :rows="rows"
-          @clickRow="onClickRow"
+          clickable
+          @clickRow="onClickDeal"
       />
 
       <ui-popup
-          :show="selectedRow !== null"
-          @hide="selectedRow = null"
+          :show="documentRows.length > 0"
+          @hide="documentRows = []"
       >
-         <div class="text-center text-xl font-semibold">
-          {{ findDocumentsForRow(selectedRow).length }} documents found
+        <div class="flex items-center gap-2 border-b pb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor" class="w-8 h-8">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12"/>
+          </svg>
+          <div class="text-center text-3xl font-semibold">
+            Document List
+          </div>
         </div>
 
         <app-table
             :columns="docColumns"
-            :rows="getDocumentRows(findDocumentsForRow(selectedRow))"
+            :rows="documentRows"
         />
-
-        <ui-debug>{{ findDocumentsForRow(selectedRow) }}</ui-debug>
       </ui-popup>
     </div>
   </layout-app>
@@ -45,9 +44,10 @@ import {columns as docColumns, getDocumentRows} from "./table-docs";
 
 const inputSearch = ref('');
 
-const selectedRow = ref<Row | null>(null);
-function onClickRow(row: Row) {
-  selectedRow.value = row;
+const documentRows = ref<Row[]>([]);
+
+function onClickDeal(row: Row) {
+  documentRows.value = getDocumentRows(findDocumentsForRow(row))
 }
 
 function findDocumentsForRow(row: Row) {
