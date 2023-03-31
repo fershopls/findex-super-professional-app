@@ -19,6 +19,7 @@ declare module '@vue/runtime-core' {
     UiButton: typeof import('./Ui/Button.vue')['default']
     UiDebug: typeof import('./Ui/Debug.vue')['default']
     UiLogo: typeof import('./Ui/Logo.vue')['default']
+    UiPopup: typeof import('./Ui/Popup.vue')['default']
     UiSearchBar: typeof import('./Ui/SearchBar.vue')['default']
   }
 }
