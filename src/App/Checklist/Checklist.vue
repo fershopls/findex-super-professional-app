@@ -35,7 +35,7 @@ interface Model {
 
 const props = defineProps<{
   models: Model[];
-  modelValue: string[];
+  modelValue: (string|number)[];
 }>();
 
 const emit = defineEmits<{
@@ -44,7 +44,7 @@ const emit = defineEmits<{
 
 const inputSearch = ref('');
 
-function onSelect(key: string) {
+function onSelect(key: string|number) {
   // Toggle if already selected
   if (props.modelValue.includes(key)) {
     emit('update:modelValue', props.modelValue.filter(k => k !== key));
@@ -53,7 +53,7 @@ function onSelect(key: string) {
   }
 }
 
-function isSelected(key: string) {
+function isSelected(key: string|number) {
   return props.modelValue.includes(key);
 }
 

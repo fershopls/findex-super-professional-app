@@ -57,7 +57,7 @@ import SortByIcon from './SortByIcon.vue';
 
 const props = defineProps<{
   column: ColumnType;
-  checklist: string[];
+  checklist: (string|number)[];
   sortBy: SortByType;
 }>();
 
