@@ -39,7 +39,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-    (event: 'update:modelValue', value: string[]): void;
+    (event: 'update:modelValue', value: (string|number)[]): void;
 }>();
 
 const inputSearch = ref('');

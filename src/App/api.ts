@@ -1,9 +1,11 @@
 import datasetJson from '@/data/deals_dataset.json';
-import {Dataset, Agent, Source, ClientIssuer, Industry, Analyst, Holding, DealType} from "@/types";
+import {Agent, Source, ClientIssuer, Industry, Analyst, Holding, DealType, Data} from "@/types";
 
-export const dataset: Dataset['data'] = datasetJson['data'];
+// @ts-ignore
+export const dataset: Data = datasetJson['data'];
 
 function join(namespace: string, id: number, foreignKey: string = 'Id'): any {
+    // @ts-ignore
     return dataset[namespace].find((item: any) => item[foreignKey] === id);
 }
 
