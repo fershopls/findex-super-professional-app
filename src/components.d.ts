@@ -17,5 +17,6 @@ declare module '@vue/runtime-core' {
     Main: typeof import('./Main.vue')['default']
     UiDebug: typeof import('./Ui/Debug.vue')['default']
     UiLogo: typeof import('./Ui/Logo.vue')['default']
+    UiSearchBar: typeof import('./Ui/SearchBar.vue')['default']
   }
 }
