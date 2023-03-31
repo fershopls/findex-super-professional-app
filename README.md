@@ -5,6 +5,7 @@
 https://github.com/fershopls/findex-super-professional-app
 
 ## Highlights
+- Beautiful Composables in @/support.ts file!!
 - Using Antfu Vue Unplug & Auto import to ease development experience
 - Using tailwind for fast component prototyping and elegant styling
 - Using Vite for fast hot reload and TS support
