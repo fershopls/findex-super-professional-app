@@ -1,9 +1,10 @@
 import datasetJson from '@/data/deals_dataset.json';
 import {Dataset, Agent, Source, ClientIssuer, Industry, Analyst, Holding, DealType} from "../types";
-const dataset: Dataset = datasetJson;
+
+export const dataset: Dataset['data'] = datasetJson['data'];
 
 function join(namespace: string, id: number, foreignKey: string = 'Id'): any {
-    return dataset['data'][namespace].find((item: any) => item[foreignKey] === id);
+    return dataset[namespace].find((item: any) => item[foreignKey] === id);
 }
 
 function getAgent(id: number): Agent {
@@ -43,7 +44,7 @@ export interface Model {
 }
 
 export function getAllModels(): Model[] {
-    const rows = dataset['data']['Holdings'];
+    const rows = dataset['Holdings'];
 
     return rows.map((row) => {
         return {
