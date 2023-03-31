@@ -26,7 +26,7 @@
 
     <div class="mt-4 bg-white rounded overflow-x-scroll">
       <table class="">
-        <thead class="border-b">
+        <thead class="">
         <tr>
           <Column
               v-for="column in columns"
