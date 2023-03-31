@@ -68,6 +68,6 @@ export function getAllModels(): Model[] {
     });
 }
 
-export function getDocumentsByDealId(id: number) {
+export function getDocumentsByDealId(id: string | number) {
     return datasetDocuments.docs.filter((doc) => doc.deal_id === id);
 }
