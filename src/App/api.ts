@@ -1,5 +1,5 @@
 import datasetJson from '@/data/deals_dataset.json';
-import {Dataset, Agent, Source, ClientIssuer, Industry, Analyst, Holding, DealType} from "../types";
+import {Dataset, Agent, Source, ClientIssuer, Industry, Analyst, Holding, DealType} from "@/types";
 
 export const dataset: Dataset['data'] = datasetJson['data'];
 
