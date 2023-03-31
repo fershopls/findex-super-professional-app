@@ -9,12 +9,14 @@
             :column="column"
             :checklist="filtersByColumnKey[column.key] ?? []"
             @update:checklist="filtersByColumnKey[column.key] = $event"
+            :sort-by="sortBy"
+            @update:sortBy="onSortBy(column.key, $event)"
         >
         </Column>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="row in filter(rows)" :key="row.id" class="even:bg-gray-100">
+      <tr v-for="row in sort(filter(rows))" :key="row.id" class="even:bg-gray-100">
         <td v-for="column in columns" :key="column.key" class="px-4 py-3 text-sm">
           {{ row.find(r => r.column === column.key)?.value }}
         </td>
@@ -26,14 +28,14 @@
 
 <script lang="ts" setup>
 import Column from './Column.vue';
-import {Column as ColumnType, Row} from "./types";
+import {Column as ColumnType, Row, SortBy} from "./types";
 
 const props = defineProps<{
   columns: ColumnType[];
   rows: Row[];
 }>();
 
-const filtersByColumnKey = ref<{[key: string]: (number|string)[]}>({});
+const filtersByColumnKey = ref<{ [key: string]: (number | string)[] }>({});
 
 function filter(rows: Row[]): Row[] {
   // For every row
@@ -66,13 +68,40 @@ function filter(rows: Row[]): Row[] {
   });
 }
 
-// const sortBy = ref('');
-//
-// function onSortBy(column) {
-//   sortBy.value = column;
-// }
-//
-// function isSortedBy(column) {
-//   return sortBy.value === column;
-// }
+function sort(rows: Row[]): Row[] {
+  if (!sortBy.value.key) {
+    return rows;
+  }
+
+  return rows.sort((a, b) => {
+    // Perform a simple sorting
+    const aCell = a.find(r => r.column === sortBy.value.key);
+    const bCell = b.find(r => r.column === sortBy.value.key);
+
+    if (!aCell || !bCell) {
+      return 0;
+    }
+
+    // Lowercase the values for a more natural sorting
+    const aCellValue = aCell.value.toLowerCase();
+    const bCellValue = bCell.value.toLowerCase();
+
+    if (aCellValue < bCellValue) {
+      return sortBy.value.ascending ? -1 : 1;
+    }
+
+    if (aCellValue > bCellValue) {
+      return sortBy.value.ascending ? 1 : -1;
+    }
+
+    return 0;
+  });
+}
+
+const sortBy = ref<SortBy>({key: null, ascending: true});
+
+function onSortBy(key: string, ascending: boolean) {
+  sortBy.value.key = key;
+  sortBy.value.ascending = ascending;
+}
 </script>

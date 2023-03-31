@@ -11,3 +11,8 @@ export interface Cell {
     value: string;
     columnId?: number|string;
 }
+
+export interface SortBy {
+    key: string | null;
+    ascending: boolean;
+}

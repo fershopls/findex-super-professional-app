@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     AppMain: typeof import('./App/Main.vue')['default']
     AppTable: typeof import('./App/Table/Table.vue')['default']
     AppTableColumn: typeof import('./App/Table/Column.vue')['default']
+    AppTableSortByIcon: typeof import('./App/Table/SortByIcon.vue')['default']
     ComponentsHelloWorld: typeof import('./components/HelloWorld.vue')['default']
     LayoutApp: typeof import('./Layout/App.vue')['default']
     Main: typeof import('./Main.vue')['default']
