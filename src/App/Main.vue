@@ -22,7 +22,16 @@
           :show="selectedRow !== null"
           @hide="selectedRow = null"
       >
-        {{ findDocumentsForRow(selectedRow).length }} documents found
+         <div class="text-center text-xl font-semibold">
+          {{ findDocumentsForRow(selectedRow).length }} documents found
+        </div>
+
+        <app-table
+            :columns="docColumns"
+            :rows="getDocumentRows(findDocumentsForRow(selectedRow))"
+        />
+
+        <ui-debug>{{ findDocumentsForRow(selectedRow) }}</ui-debug>
       </ui-popup>
     </div>
   </layout-app>
@@ -32,6 +41,7 @@
 import {getDocumentsByDealId} from './api';
 import {Row} from "./Table/types";
 import {columns, rows} from "@/App/table-deals";
+import {columns as docColumns, getDocumentRows} from "./table-docs";
 
 const inputSearch = ref('');
 

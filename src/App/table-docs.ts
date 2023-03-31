@@ -6,6 +6,7 @@ import {bytesToHumanReadableSize} from "@/support";
 
 export const columns: Column[] = [
     { key: 'name', label: 'Name' },
+    { key: 'status', label: 'Status' },
     { key: 'directory', label: 'Directory' },
     { key: 'size', label: 'Size' },
     { key: 'created', label: 'Created At' },
@@ -16,6 +17,10 @@ export function getDocumentRows(documents: Doc[]) {
         {
             column: 'name',
             value: document.name,
+        },
+        {
+            column: 'status',
+            value: document.status_name,
         },
         {
             column: 'created',
