@@ -4,10 +4,12 @@
       @click="open = !open"
   >
     <div class="flex items-center gap-2">
-      <sort-by-icon v-if="sortBy.key === column.key" :ascending="sortBy.ascending" />
-      <div class="text-xs uppercase tracking-widest">{{ column.label }}</div>
+      <sort-by-icon v-if="sortBy.key === column.key" :ascending="sortBy.ascending" class="text-sky-500"/>
+      <div>
+        <div class="text-xs uppercase tracking-widest">{{ column.label }}</div>
+        <div v-if="checklist.length" class="text-yellow-600 text-xs">{{ checklist.length }} filters</div>
+      </div>
     </div>
-    <div v-if="checklist.length" class="text-yellow-600 text-xs">{{ checklist.length }} filters</div>
   </th>
 
   <template v-if="open">
