@@ -8,6 +8,7 @@ export const columns: Column[] = [
     { key: 'name', label: 'Name' },
     { key: 'status', label: 'Status' },
     { key: 'directory', label: 'Directory' },
+    { key: 'file', label: 'File' },
     { key: 'size', label: 'Size' },
     { key: 'created', label: 'Created At' },
 ];
@@ -16,6 +17,10 @@ export function getDocumentRows(documents: Doc[]) {
     return documents.map(document => [
         {
             column: 'name',
+            value: document.display_name,
+        },
+        {
+            column: 'file',
             value: document.name,
         },
         {
