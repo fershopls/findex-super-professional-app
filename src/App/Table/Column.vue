@@ -12,43 +12,39 @@
     </div>
   </th>
 
-  <template v-if="open">
-    <div class="fixed inset-0">
-      <div class="absolute inset-0 bg-gray-800/80 backdrop-blur"></div>
-      <div class="absolute inset-0 py-8 px-3 overflow-y-auto" @click.self="open = false">
-        <div class="bg-white mx-auto rounded max-w-xl p-3 grid gap-4">
-          <div class="text-xl text-center font-bold">
-            Filter Industry
-          </div>
-
-          <div class="grid gap-2 grid-cols-2">
-            <ui-button @click="onSortBy(true)">
-              Sort A to Z
-            </ui-button>
-
-            <ui-button @click="onSortBy(false)">
-              Sort Z to A
-            </ui-button>
-          </div>
-
-          <app-checklist
-              v-if="column.filterItems"
-              :model-value="checklist"
-              @update:modelValue="$emit('update:checklist', $event)"
-              :models="column.filterItems"
-          />
-
-          <div class="grid grid-cols-2 gap-4">
-            <ui-button v-if="checklist.length" @click="$emit('update:checklist', [])">Clear {{ checklist.length }}
-              filters
-            </ui-button>
-            <div v-else></div>
-            <ui-button @click="open = false">Close</ui-button>
-          </div>
-        </div>
-      </div>
+  <ui-popup
+      :show="open"
+      @hide="open = false"
+  >
+    <div class="text-xl text-center font-bold">
+      Filter Industry
     </div>
-  </template>
+
+    <div class="grid gap-2 grid-cols-2">
+      <ui-button @click="onSortBy(true)">
+        Sort A to Z
+      </ui-button>
+
+      <ui-button @click="onSortBy(false)">
+        Sort Z to A
+      </ui-button>
+    </div>
+
+    <app-checklist
+        v-if="column.filterItems"
+        :model-value="checklist"
+        @update:modelValue="$emit('update:checklist', $event)"
+        :models="column.filterItems"
+    />
+
+    <div class="grid grid-cols-2 gap-4">
+      <ui-button v-if="checklist.length" @click="$emit('update:checklist', [])">Clear {{ checklist.length }}
+        filters
+      </ui-button>
+      <div v-else></div>
+      <ui-button @click="open = false">Close</ui-button>
+    </div>
+  </ui-popup>
 </template>
 
 <script lang="ts" setup>
