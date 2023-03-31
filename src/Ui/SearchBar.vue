@@ -6,7 +6,7 @@
 
     <input
         :value="props.modelValue"
-        @input="emit('update:modelValue', $event.target.value)"
+        @input="updateValue"
         type="text"
         class="ring-0 outline-0 flex-grow py-3 rounded"
         placeholder="Search"
@@ -22,4 +22,8 @@ const props = defineProps<{
 const emit = defineEmits<{
     (event: 'update:modelValue', value: string): void;
 }>();
+
+const updateValue = (e: Event) => {
+  emit('update:modelValue', (e.target as HTMLInputElement).value)
+};
 </script>
