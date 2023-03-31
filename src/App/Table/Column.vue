@@ -33,6 +33,7 @@
           :model-value="checklist"
           @update:modelValue="$emit('update:checklist', $event)"
           :models="column.filterItems"
+          autofocus
       />
 
       <div class="grid grid-cols-2 gap-4" v-if="column.filterItems">

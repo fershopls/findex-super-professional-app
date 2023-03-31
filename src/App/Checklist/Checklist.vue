@@ -1,6 +1,6 @@
 <template>
   <div class="grid gap-1">
-    <input v-model="inputSearch" type="text" class="outline-0 ring-0 border px-2 py-3 rounded" placeholder="Filter">
+    <input ref="elementInputSearch" v-model="inputSearch" type="text" class="outline-0 ring-0 border px-2 py-3 rounded" placeholder="Filter">
 
     <div class="text-gray-500 text-right">
       {{ modelValue.length }} of {{ models.length }} selected
@@ -42,21 +42,28 @@
 </style>
 
 <script lang="ts" setup>
+import {onMounted} from "vue";
+
 interface Model {
   key: string|number;
-  value: string
+  value: string;
 }
 
 const props = defineProps<{
   models: Model[];
   modelValue: (string|number)[];
+  autofocus?: boolean;
 }>();
 
 const emit = defineEmits<{
     (event: 'update:modelValue', value: (string|number)[]): void;
 }>();
 
+const elementInputSearch = ref<HTMLInputElement|null>(null);
 const inputSearch = ref('');
+
+// Auto focus on input
+onMounted(() => props.autofocus && elementInputSearch.value?.focus());
 
 function onSelect(key: string|number) {
   // Toggle if already selected
