@@ -29,7 +29,7 @@
 </style>
 
 <script lang="ts" setup>
-import { useBodyScrollFreeze } from "@/support";
+import { useBodyScrollFreeze, useEscKey } from "@/support";
 
 const props = defineProps<{
   show?: boolean;
@@ -44,6 +44,9 @@ const { freeze, unfreeze } = useBodyScrollFreeze();
 
 // When the popup is shown, freeze the body scroll
 watch(() => props.show, (show) => show ? freeze() : unfreeze());
+
+// Hide on ESC key
+useEscKey(() => props.show && hide());
 
 function hide() {
   emit('hide');
