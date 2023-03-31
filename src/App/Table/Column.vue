@@ -4,7 +4,7 @@
       @click="open = !open"
   >
     <span class="text-xs uppercase tracking-widest">{{ column.label }}</span>
-    <span v-if="checklist.length" class="ml-2 text-yellow-600 text-xs">(Filtered)</span>
+    <div v-if="checklist.length" class="text-yellow-600 text-xs">{{checklist.length}} filters</div>
   </th>
 
   <template v-if="open">
