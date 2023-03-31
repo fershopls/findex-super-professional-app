@@ -14,14 +14,22 @@
           v-show="rows.length"
           :columns="columns"
           :rows="rows"
+          @clickRow="onClickRow"
       />
+
+      <ui-popup
+          :show="selectedRow !== null"
+          @hide="selectedRow = null"
+      >
+        {{ findDocumentsForRow(selectedRow).length }} documents found
+      </ui-popup>
     </div>
   </layout-app>
 </template>
 
 <script lang="ts" setup>
 import {searchOnEveryRow} from "./search-on-every-row";
-import {dataset, getAllModels, Model} from './api';
+import {dataset, getAllModels, getDocumentsByDealId, Model} from './api';
 import {Column, Row} from "./Table/types";
 
 const columns: Column[] = [
@@ -52,7 +60,7 @@ const columns: Column[] = [
 
 const allRows: Row[] = getAllModels().map((model: Model) => {
   return [
-    {column: 'deal', value: model.row.DealName},
+    {column: 'deal', value: model.row.DealName, columnId: model.row.DealId},
     {column: 'issuer', value: model.joins.Issuer.IssuerName, columnId: model.joins.Issuer.IssuerId},
     {column: 'industry', value: model.joins.Industry?.IndustryName || 'N/A', columnId: model.joins.Industry?.Id},
     {column: 'access', value: 'Public'},
@@ -75,4 +83,25 @@ const rows = computed(() => {
 });
 
 const inputSearch = ref('');
+
+const selectedRow = ref<Row | null>(null);
+function onClickRow(row: Row) {
+  selectedRow.value = row;
+}
+
+function findDocumentsForRow(row: Row) {
+  const dealColumn = row.find(x => x.column === 'deal');
+
+  if (!dealColumn) {
+    throw new Error('Deal column not found');
+  }
+
+  const dealId = dealColumn.columnId;
+
+  if (!dealId) {
+    throw new Error('Deal id not found');
+  }
+
+  return getDocumentsByDealId(dealId);
+}
 </script>

@@ -66,7 +66,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-    (event: 'onClickRow', row: Row): void;
+    (event: 'clickRow', row: Row): void;
 }>();
 
 const sortBy = ref<SortBy>({key: null, ascending: true});
@@ -105,5 +105,9 @@ function onExport() {
   data = data.concat(rows);
 
   arrayToCsvDownload(data, 'export.csv');
+}
+
+function onClickRow(row: Row) {
+  emit('clickRow', row);
 }
 </script>
