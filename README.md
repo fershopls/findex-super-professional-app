@@ -6,6 +6,7 @@ https://github.com/fershopls/findex-super-professional-app
 
 ## Highlights
 - Beautiful Composables in @/support.ts file!!
+- Sort value for tables for more natural sorting! EX. Sorting by file size on string would put together 11KB and 15MB. Using sort values, we can specify the value that should be used for sorting.
 - Using Antfu Vue Unplug & Auto import to ease development experience
 - Using tailwind for fast component prototyping and elegant styling
 - Using Vite for fast hot reload and TS support

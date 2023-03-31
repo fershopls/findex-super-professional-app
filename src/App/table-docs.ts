@@ -30,6 +30,7 @@ export function getDocumentRows(documents: Doc[]) {
         {
             column: 'created',
             value: dayjs(document.created).format('MMM D, YYYY'),
+            sortValue: dayjs(document.created).unix(),
         },
         {
             column: 'directory',
@@ -38,6 +39,7 @@ export function getDocumentRows(documents: Doc[]) {
         {
             column: 'size',
             value: bytesToHumanReadableSize(parseInt(document.size)),
+            sortValue: parseInt(document.size),
         },
     ]);
 }

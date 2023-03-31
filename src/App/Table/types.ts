@@ -9,6 +9,7 @@ export type Row = Cell[];
 export interface Cell {
     column: string;
     value: string;
+    sortValue?: string|number;
     columnId?: number|string;
 }
 

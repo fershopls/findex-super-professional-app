@@ -1,4 +1,4 @@
-import {Row, SortBy} from "@/App/Table/types";
+import {Cell, Row, SortBy} from "@/App/Table/types";
 
 export function search(query: string, rows: Row[]): Row[] {
     return rows.filter((row): boolean => {
@@ -50,6 +50,14 @@ export function sort(sortBy: SortBy, rows: Row[]): Row[] {
         return rows;
     }
 
+    function getSortValue(cell: Cell) {
+        if (cell.sortValue) {
+            return cell.sortValue;
+        }
+
+        return cell.value.toLowerCase();
+    }
+
     return rows.sort((a, b) => {
         // Perform a simple sorting
         const aCell = a.find(r => r.column === sortBy.key);
@@ -60,8 +68,8 @@ export function sort(sortBy: SortBy, rows: Row[]): Row[] {
         }
 
         // Lowercase the values for a more natural sorting
-        const aCellValue = aCell.value.toLowerCase();
-        const bCellValue = bCell.value.toLowerCase();
+        const aCellValue = getSortValue(aCell);
+        const bCellValue = getSortValue(bCell);
 
         if (aCellValue < bCellValue) {
             return sortBy.ascending ? -1 : 1;
