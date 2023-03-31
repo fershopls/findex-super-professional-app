@@ -29,10 +29,10 @@ export function bytesToHumanReadableSize(bytes: number): string {
     if (bytes < 1024) {
         return bytes + ' Bytes';
     } else if (bytes >= 1024 && bytes < Math.pow(1024, 2)) {
-        return (bytes / 1024).toFixed(2) + 'KB';
+        return Math.floor(bytes / 1024) + 'KB';
     } else if (bytes >= Math.pow(1024, 2) && bytes < Math.pow(1024, 3)) {
-        return (bytes / Math.pow(1024, 2)).toFixed(2) + 'MB';
+        return Math.floor(bytes / Math.pow(1024, 2)) + 'MB';
     } else {
-        return (bytes / Math.pow(1024, 3)).toFixed(2) + 'GB';
+        return Math.floor(bytes / Math.pow(1024, 3)) + 'GB';
     }
 }
