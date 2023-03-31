@@ -6,6 +6,7 @@ https://github.com/fershopls/findex-super-professional-app
 
 ## Highlights
 - Using Antfu Vue Unplug & Auto import to ease development experience
+- Using tailwind for fast component prototyping and elegant styling
 
 ## Overview
 FinDox is a simple web application that allows users to search for deals and view associated documents.
