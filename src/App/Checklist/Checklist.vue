@@ -6,7 +6,7 @@
       {{ modelValue.length }} of {{ models.length }} selected
     </div>
 
-    <div class="grid max-h-[50vh] overflow-y-auto">
+    <div class="grid max-h-[50vh] overflow-y-auto custom-scroll">
       <div
         v-for="model in filter(inputSearch, models)" :key="model.key"
         class="flex items-center gap-2 py-3 group cursor-pointer hover:text-sky-500"
@@ -26,6 +26,20 @@
     </div>
   </div>
 </template>
+
+<style>
+.custom-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  @apply bg-gray-300 rounded;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  @apply bg-blue-400 rounded-lg;
+}
+</style>
 
 <script lang="ts" setup>
 interface Model {
