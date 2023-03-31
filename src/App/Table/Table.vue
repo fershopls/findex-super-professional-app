@@ -1,6 +1,13 @@
 <template>
-  <div class="grid">
-    <div class="flex justify-end gap-5">
+  <div class="grid gap-3">
+    <ui-search-bar v-model="inputSearch"/>
+
+    <div class="flex justify-between items-center gap-5">
+      <div class="text-lg text-gray-600">
+        <span v-if="inputSearch">Searching <span class="font-bold">"{{ inputSearch }}"</span>.</span>
+        Found {{ rows.length }} items.
+      </div>
+
       <ui-button @click="onExport()">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
              stroke="currentColor" class="w-5 h-5">
@@ -30,7 +37,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(row, index) in computedRows" :key="index" class="even:bg-gray-100 hover:bg-yellow-200 cursor-pointer"
+        <tr v-for="(row, index) in computedRows" :key="index" class="even:bg-gray-100"
+            :class="clickable ? 'hover:bg-yellow-200 cursor-pointer' : ''"
             @click="onClickRow(row)"
         >
           <td v-for="column in columns" :key="column.key" class="px-4 py-3 text-sm">
@@ -52,12 +60,14 @@ import {search, sort, filter} from "@/App/Table/table-filters";
 const props = defineProps<{
   columns: ColumnType[];
   rows: Row[];
-  search?: string;
+  clickable?: boolean;
 }>();
 
 const emit = defineEmits<{
     (event: 'clickRow', row: Row): void;
 }>();
+
+const inputSearch = ref<string>('');
 
 const sortBy = ref<SortBy>({key: null, ascending: true});
 
@@ -66,8 +76,8 @@ const filtersByColumnKey = ref<{ [key: string]: (number | string)[] }>({});
 const computedRows = computed<Row[]>(() => {
   let rows = props.rows;
   // Search
-  if (props.search) {
-    rows = search(props.search, rows);
+  if (inputSearch.value) {
+    rows = search(inputSearch.value, rows);
   }
   // Filter
   rows = filter(filtersByColumnKey.value, rows);
@@ -102,6 +112,8 @@ function onExport() {
 }
 
 function onClickRow(row: Row) {
-  emit('clickRow', row);
+  if (props.clickable === true) {
+    emit('clickRow', row);
+  }
 }
 </script>
