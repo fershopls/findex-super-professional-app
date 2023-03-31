@@ -45,6 +45,7 @@ const emit = defineEmits<{
 const inputSearch = ref('');
 
 function onSelect(key: string) {
+  // Toggle if already selected
   if (props.modelValue.includes(key)) {
     emit('update:modelValue', props.modelValue.filter(k => k !== key));
   } else {
@@ -60,7 +61,7 @@ function filter(query: string, models: Model[]) {
   if (!query) {
     return models;
   }
-
+  // Filter all the models in checklist by user input
   return models.filter(model => model.value.toLowerCase().includes(query.toLowerCase()));
 }
 </script>
