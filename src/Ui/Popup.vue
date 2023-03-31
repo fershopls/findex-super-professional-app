@@ -3,7 +3,7 @@
     <div class="fixed inset-0" v-if="show">
       <div v-if="show" class="absolute inset-0 bg-gray-600/90"></div>
       <div class="absolute inset-0 py-8 px-3 overflow-y-auto" @click.self="hide()">
-        <div class="bg-white mx-auto rounded-xl max-w-xl p-3 grid gap-4">
+        <div class="bg-white mx-auto rounded-xl max-w-3xl p-3 grid gap-4">
           <slot></slot>
         </div>
       </div>
