@@ -1,8 +1,13 @@
 import datasetJson from '@/data/deals_dataset.json';
+import datasetDocumentsJson from '@/data/docs_dataset.json';
 import {Agent, Source, ClientIssuer, Industry, Analyst, Holding, DealType, Data} from "@/types";
+import {DocumentsData} from "@/types-docs";
 
 // @ts-ignore
 export const dataset: Data = datasetJson['data'];
+
+// @ts-ignore
+export const datasetDocuments: DocumentsData = datasetDocumentsJson['data'];
 
 function join(namespace: string, id: number, foreignKey: string = 'Id'): any {
     // @ts-ignore
@@ -61,4 +66,8 @@ export function getAllModels(): Model[] {
             }
         };
     });
+}
+
+export function getDocumentsByDealId(id: number) {
+    return datasetDocuments.docs.filter((doc) => doc.deal_id === id);
 }
