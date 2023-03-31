@@ -33,7 +33,9 @@
               :models="column.filterItems"
           />
 
-          <div class="grid">
+          <div class="grid grid-cols-2 gap-4">
+            <ui-button v-if="checklist.length" @click="$emit('update:checklist', [])">Clear {{ checklist.length }} filters</ui-button>
+            <div v-else></div>
             <ui-button @click="open = false">Close</ui-button>
           </div>
         </div>
