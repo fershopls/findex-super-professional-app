@@ -1,7 +1,11 @@
 # FinDox - Simple Deal Search & Document Viewer
 
 ## Live preview
+
 https://github.com/fershopls/findex-super-professional-app
+
+## Highlights
+- Using Antfu Vue Unplug & Auto import to ease development experience
 
 ## Overview
 FinDox is a simple web application that allows users to search for deals and view associated documents.
