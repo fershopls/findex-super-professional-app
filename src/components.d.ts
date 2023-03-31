@@ -10,11 +10,14 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     App: typeof import('./Main.vue')['default']
+    AppChecklist: typeof import('./App/Checklist/Checklist.vue')['default']
     AppMain: typeof import('./App/Main.vue')['default']
     AppTable: typeof import('./App/Table/Table.vue')['default']
+    AppTableColumn: typeof import('./App/Table/Column.vue')['default']
     ComponentsHelloWorld: typeof import('./components/HelloWorld.vue')['default']
     LayoutApp: typeof import('./Layout/App.vue')['default']
     Main: typeof import('./Main.vue')['default']
+    UiButton: typeof import('./Ui/Button.vue')['default']
     UiDebug: typeof import('./Ui/Debug.vue')['default']
     UiLogo: typeof import('./Ui/Logo.vue')['default']
     UiSearchBar: typeof import('./Ui/SearchBar.vue')['default']

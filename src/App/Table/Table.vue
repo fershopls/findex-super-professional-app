@@ -3,24 +3,18 @@
     <table class="w-full">
       <thead class="border-b">
       <tr>
-        <th v-for="column in columns" :key="column.key"
-            class="py-3 text-left px-3 font-normal text-xs uppercase tracking-widest text-gray-500 hover:bg-blue-100 cursor-pointer"
+        <Column
+            v-for="column in columns"
+            :key="column.key"
+            :column="column"
+            :checklist="filtersByColumnKey[column.key] ?? []"
+            @update:checklist="filtersByColumnKey[column.key] = $event"
         >
-          <div class="flex items-center gap-1">
-            <template v-if="0">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                   stroke="currentColor" class="w-4 h-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
-              </svg>
-            </template>
-
-            {{ column.label }}
-          </div>
-        </th>
+        </Column>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="row in rows" :key="row.id" class="even:bg-gray-100">
+      <tr v-for="row in filter(rows)" :key="row.id" class="even:bg-gray-100">
         <td v-for="column in columns" :key="column.key" class="px-4 py-3 text-sm">
           {{ row.find(r => r.column === column.key)?.value }}
         </td>
@@ -31,10 +25,46 @@
 </template>
 
 <script lang="ts" setup>
+import Column from './Column.vue';
+import {Column as ColumnType, Row} from "./types";
+
 const props = defineProps<{
-  columns: { key: string; label: string }[];
-  rows: { id: number; column: string; value: string }[];
+  columns: ColumnType[];
+  rows: Row[];
 }>();
+
+const filtersByColumnKey = ref<{[key: string]: (number|string)[]}>({});
+
+function filter(rows: Row[]): Row[] {
+  // For every row
+  return rows.filter(row => {
+    // Iterate though all column applied filters
+    for (const columnKey in filtersByColumnKey.value) {
+      // Get the cell for this column
+      const cell = row.find(r => r.column === columnKey);
+      if (!cell || !cell.columnId) {
+        // If the cell is not found or the cell has no id, then we can't filter
+        return false;
+      }
+
+      // Get the column id of the cell
+      const columnId = cell.columnId;
+
+      // If there are no filters for this column, skip the row
+      if (!filtersByColumnKey.value[columnKey] || filtersByColumnKey.value[columnKey].length === 0) {
+        continue;
+      }
+
+      // If the column id is not in the filters, skip the row
+      if (!filtersByColumnKey.value[columnKey].includes(columnId)) {
+        return false;
+      }
+    }
+
+    // All filters passed, return the row
+    return true;
+  });
+}
 
 // const sortBy = ref('');
 //
