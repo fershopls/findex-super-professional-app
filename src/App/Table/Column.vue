@@ -2,7 +2,7 @@
   <th
       class="text-left font-normal text-gray-500"
   >
-    <div class="min-h-[50px] py-3 whitespace-nowrap px-3 flex items-center gap-2 cursor-pointer hover:text-sky-500 hover:border-sky-400 border-b" @click="open = !open">
+    <div class="min-h-[65px] py-3 whitespace-nowrap px-3 flex items-center gap-2 cursor-pointer hover:text-sky-500 hover:border-sky-400 border-b" @click="open = !open">
       <sort-by-icon v-if="sortBy.key === column.key" :ascending="sortBy.ascending" class="text-sky-500"/>
       <div>
         <div class="text-xs uppercase tracking-widest">{{ column.label }}</div>
