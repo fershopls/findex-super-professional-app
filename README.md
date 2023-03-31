@@ -2,9 +2,10 @@
 
 ## Live preview
 
-https://github.com/fershopls/findex-super-professional-app
+https://melodic-pastelito-31758a.netlify.app/
 
 ## Highlights
+- Fully responsive design! Works on mobiles!
 - Beautiful Composables in @/support.ts file!!
 - Sort value for tables for more natural sorting! EX. Sorting by file size on string would put together 11KB and 15MB. Using sort values, we can specify the value that should be used for sorting.
 - Using Antfu Vue Unplug & Auto import to ease development experience
